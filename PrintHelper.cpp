@@ -81,6 +81,10 @@ void PrintHelper::printOptions(stringstream & ss){
     ss << "      Creature in your party who are inactive rest every turn.\n\n";
 }
 
+void PrintHelper::printBattleOptions(stringstream & ss){
+    ss << "Trainer, make your move. (a-Attack, s#-Swap to slot #, r-Rest): ";
+}
+
 
 void PrintHelper::printEnd(int count, stringstream & ss) {
     ss << "\nSadly, your entire party of creatures has fallen in battle.\n";

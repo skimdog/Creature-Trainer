@@ -49,6 +49,14 @@ public:
     static void printOptions(stringstream & ss);
 
     /**
+    * Requires: Nothing.
+    * Modifies: ss
+    * Effects:  Prints shorter explanation of valid keyboard commands during
+    *           battle
+    */
+    static void printBattleOptions(stringstream & ss);
+
+    /**
      * Requires: Nothing.
      * Modifies: ss
      * Effects:  Prints message for when each member of your party has fainted

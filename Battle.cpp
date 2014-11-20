@@ -40,8 +40,8 @@ void runBattle(Trainer &player1, Party &party, stringstream& ss, int winCount){
             ss << "You must swap to another creature!\n";
         }
         
-        ss << "Trainer, make your move. (a-Attack, s#-Swap to slot #): ";
-        
+        PrintHelper::printBattleOptions(ss);
+       
         // Ask the player for her next move…
         playerMove = player1.makeMove(ss);
         ss.str("");
@@ -117,7 +117,7 @@ void creatureAttack(Creature& attacker, Creature& defender, bool isPlayer, strin
     int aStrength = attacker.getAttackStrength();
     int aElement = attacker.getAttackElement();
     
-    int damageDone = defender.damage(aStrength, aElement);
+   
     
     string aName, dName;
     if (isPlayer) {
@@ -133,10 +133,15 @@ void creatureAttack(Creature& attacker, Creature& defender, bool isPlayer, strin
         ss << aName << " can't attack because it has fainted!\n";
         return;
     }
+    else{
+        int damageDone = defender.damage(aStrength, aElement);
+        ss << aName << " attacks " << dName;
+        ss << " with " << CreatureType::elementName(aElement);
+        ss << " for " << damageDone << " damage.\n";
+    }
 
-    ss << aName << " attacks " << dName;
-    ss << " with " << CreatureType::elementName(aElement);
-    ss << " for " << damageDone << " damage.\n";
+
+   
     
     if (defender.getHealthCurr() == 0) {
         ss << dName << " faints!\n";
