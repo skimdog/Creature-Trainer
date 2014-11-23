@@ -37,7 +37,7 @@ public:
     /**
      * Requires: Nothing.
      * Modifies: Nothing.
-     * Effects:  Prints out the final situation
+     * Effects:  Splits a string into a vector of strings
      */
     vector<string> splitString(string inString, string splitOn=" ");
     

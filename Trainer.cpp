@@ -56,11 +56,7 @@ void Trainer::finalSituation(stringstream& situation) {
 }
 
 
-/**
- * Requires: Nothing.
- * Modifies: Nothing.
- * Effects:  Prints out the final situation
- */
+
 vector<string> Trainer::splitString(string inString, string splitOn) {
     vector<string> elements;
     string substring;
