@@ -23,11 +23,16 @@
 
 string Trainer::makeMove(stringstream& situation) {
     
+    string situationString = situation.str();
+    
+    // Here's how to use the stringSplit function
+    vector<string> lines = splitString(situationString, "\n");
+    
     // Output for human player
     // Instead of doing this, you will need to replace the code of Trainer 
     // to parse the input situation and create a proper response,
     // (like "a" for attack or "s3" to swap to the creature in slot 3).
-    cout << situation.str(); 
+    cout << situationString;
     
 
     /* 
@@ -38,7 +43,8 @@ string Trainer::makeMove(stringstream& situation) {
      * generate a response string.
      */
     string response;
-    cin >> response; 
+    cin >> response;
+        
 
     return response;
 }
@@ -47,4 +53,32 @@ string Trainer::makeMove(stringstream& situation) {
 void Trainer::finalSituation(stringstream& situation) {
     cout << situation.str();
     
+}
+
+
+/**
+ * Requires: Nothing.
+ * Modifies: Nothing.
+ * Effects:  Prints out the final situation
+ */
+vector<string> Trainer::splitString(string inString, string splitOn) {
+    vector<string> elements;
+    string substring;
+    
+    size_t splitIndex = inString.find(splitOn),
+    substrStart = 0;
+    
+    // keep searching until no spaces remain
+    while (splitIndex != string::npos) {
+        substring = inString.substr(substrStart, splitIndex - substrStart);
+        elements.push_back(substring);
+        substrStart = splitIndex + 1;
+        // start at next character after finding substring
+        splitIndex = inString.find(splitOn, substrStart);
+    }
+    // add last element to vector
+    substring = inString.substr(substrStart, inString.length() - substrStart);
+    elements.push_back(substring);
+    
+    return elements;
 }

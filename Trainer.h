@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <string>
 #include <sstream>
+#include <vector>
 using namespace std;
 
 class Trainer {
@@ -31,6 +32,14 @@ public:
      * Effects:  Prints out the final situation
      */
     void finalSituation(stringstream& situation);
+    
+    
+    /**
+     * Requires: Nothing.
+     * Modifies: Nothing.
+     * Effects:  Prints out the final situation
+     */
+    vector<string> splitString(string inString, string splitOn=" ");
     
 private:
     // vvvvvv Your changes to Trainer.h go between this line…
