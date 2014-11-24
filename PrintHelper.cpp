@@ -54,7 +54,6 @@ void PrintHelper::printTeamStatus(Creature creatures[], int currCreatureIndex, s
 
 void PrintHelper::printSingleCreature(Creature& c, bool current, stringstream& ss) {
 	ss << "|";
-    ss << "LV" << c.getLevel();
 	if ( current ) {
 		ss << " *";
 	} else {
