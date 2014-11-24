@@ -10,6 +10,7 @@
 #include "EECSRandom.h"
 using namespace std;
 
+//awful names
 
 const string CreatureType::CREATURE_NAMES[] = { "Axolotyl", "Bittern", "C-lacanth",
     "Dugong", "Echidna", "Fossa", "Guanaco", "Honeybdgr", "Ibex", "Jackal",
