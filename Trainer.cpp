@@ -33,11 +33,6 @@ string Trainer::makeMove(stringstream& situation) {
     // to parse the input situation and create a proper response,
     // (like "a" for attack or "s3" to swap to the creature in slot 3).
     cout << situationString;
-    
-    
-    // HI GUYS.
-    
-    
 
     /* 
      * This line is basically what your AI chooses to do
