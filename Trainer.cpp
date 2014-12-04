@@ -72,13 +72,26 @@ string Trainer::makeMove(stringstream& situation) {
     // We do 1 to <creatureHealthBits.size()-1 because we only need the middle
     //    four elements (and are skipping the empty ones.
     
+    //new array without first and last lines
+    //first element is empty, so that we can refer the four party members to their position (1, 2, 3, 4)
+    const int PARTY_SIZE = 5;
+    string creatureParty[PARTY_SIZE];
+    for(int j = 1; j < creatureHealthBits.size() - 1; j++)
+    {
+        creatureParty[j] = creatureHealthBits[j];
+    }
+    
+    string partyNames[PARTY_SIZE];
+    int partyHealths[PARTY_SIZE];
+    
+    
     bool isActive;
     string activeName = "";
     int activeHealth = 0;
-    int activeMaxHealth = 0;
+    //int activeMaxHealth = 0;
     int activeNum = 0; // [1, 2, 3, 4]
     
-    for (int i=1; i<creatureHealthBits.size()-1; i++) {
+    for (int i = 1; i < PARTY_SIZE; i++) {
         
         isActive = false; // default
         // cout just for testing
@@ -86,7 +99,7 @@ string Trainer::makeMove(stringstream& situation) {
         
         // We are putting the string into a stringStream so we can use >>
         stringstream ss;
-        ss << creatureHealthBits[i];
+        ss << creatureParty[i];
         
         // For example, we have a stringstream ss containing " *Jackal   10/10 "
         // pull the name as a string
@@ -104,32 +117,44 @@ string Trainer::makeMove(stringstream& situation) {
             nameSS >> asterisk;
             
             nameSS >> activeName;
+            partyNames[i] = activeName;
         }
+        partyNames[i] = name;
         
         // pull the health
         int health;
         ss >> health; // health = 10
         
+        partyHealths[i] = health;
+        
         // Get rid of the slash char
-        char slash;
-        ss >> slash; // slash = '/'
+        //char slash;
+        //ss >> slash; // slash = '/'
         
         // get max health
-        int maxHealth;
-        ss >> maxHealth; // maxHealth = 10
+        //int maxHealth;
+        //ss >> maxHealth; // maxHealth = 10
         if(isActive)
         {
             activeHealth = health;
-            activeMaxHealth = maxHealth;
+            //activeMaxHealth = maxHealth;
             activeNum = i;
         }
-        
-        // cout this info for testing purposes
-        //cout << "Name: " << name << " health: " << health << "\n";
     }
     
     //cout for testing
+    //for (int i = 1; i < PARTY_SIZE; i++)
+    //{
+    //    cout << "Name: " << partyNames[i] << " health: " << partyHealths[i] << "\n";
+    //}
+    
+    //cout for testing
     //cout << "Active: #" << activeNum << " " << activeName << " " << activeHealth << "/" << activeMaxHealth << "\n";
+    
+    //DECISION********************************************************************
+    
+    
+    
     
     // This is something else you can do ONLY for testing.
     // In a previous post, I recommended #including CreatureType.h so that you
@@ -165,8 +190,11 @@ string Trainer::makeMove(stringstream& situation) {
      * comment out "cin >> response" and instead have this function
      * generate a response string.
      */
+    
+    Class1 class1;
+    
     string response;
-    cin >> response;
+    response = class1.swap(partyHealths);
     
     
     return response;
