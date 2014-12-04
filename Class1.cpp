@@ -28,25 +28,33 @@ int Class1::getHighestHealth(int list[])
     return highPos;
 }
 
-string Class1::swap(int list[])
+string Class1::swap(int list[], int activeNum)
 {
     int swapNum = getHighestHealth(list);
     string response;
     
-    switch(swapNum)
+    
+    if(swapNum != activeNum)
     {
-        case 1:
-            response = "s1";
-            break;
-        case 2:
-            response = "s2";
-            break;
-        case 3:
-            response = "s3";
-            break;
-        case 4:
-            response = "s4";
-            break;
+        switch(swapNum)
+        {
+            case 1:
+                response = "s1";
+                break;
+            case 2:
+                response = "s2";
+                break;
+            case 3:
+                response = "s3";
+                break;
+            case 4:
+                response = "s4";
+                break;
+        }
+    }
+    else
+    {
+        response = "a";
     }
     return response;
 }

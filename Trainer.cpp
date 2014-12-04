@@ -54,6 +54,11 @@ string Trainer::makeMove(stringstream& situation) {
         }
     }
     
+    
+    //PARSE OUT ENEMY DAMAGE
+    // <insert code>
+    
+    
     // Now that we know which line has the health, do something with it
     //cout << lines[pipeLine] << "\n"; // Output for testing only
     
@@ -194,7 +199,7 @@ string Trainer::makeMove(stringstream& situation) {
     Class1 class1;
     
     string response;
-    response = class1.swap(partyHealths);
+    response = class1.swap(partyHealths, activeHealth);
     
     
     return response;

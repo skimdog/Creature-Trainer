@@ -21,7 +21,7 @@ public:
     
     int getHighestHealth(int list[]);
     
-    string swap(int list[]);
+    string swap(int list[], int activeHealth);
 };
 
 // ^^^^^^ And this line. That's it!
