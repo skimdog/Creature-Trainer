@@ -9,14 +9,3 @@
 //  
 
 #include "Class1.h"
-
-/**
- * Requires: Nothing.
- * Modifies: Nothing.
- * Effects:  runs a battle given the trainer, their party, the current
- situation, and the trainer's current win count
- */
-string decide(string name, int health, int maxHealth)
-{
-    return "";
-}

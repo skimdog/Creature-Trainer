@@ -15,13 +15,6 @@
 using namespace std;
 // vvvvvv Your implementations go between this line…
 
-/**
- * Requires: Nothing.
- * Modifies: Nothing.
- * Effects:  runs a battle given the trainer, their party, the current
- situation, and the trainer's current win count
- */
-string decide(string name, int health, int maxHealth);
 
 
 // ^^^^^^ And this line. That's it!
