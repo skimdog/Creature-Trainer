@@ -71,7 +71,16 @@ string Trainer::makeMove(stringstream& situation) {
     // Now, go through this information and pull out info for each entry
     // We do 1 to <creatureHealthBits.size()-1 because we only need the middle
     //    four elements (and are skipping the empty ones.
+    
+    bool isActive;
+    string activeName = "";
+    int activeHealth = 0;
+    int activeMaxHealth = 0;
+    int activeNum = 0; // [1, 2, 3, 4]
+    
     for (int i=1; i<creatureHealthBits.size()-1; i++) {
+        
+        isActive = false; // default
         // cout just for testing
         //cout << creatureHealthBits[i] << "\n";
         
@@ -84,6 +93,19 @@ string Trainer::makeMove(stringstream& situation) {
         string name;
         ss >> name; // name = "*Jackal"
         
+        //if this creature is active
+        if(name[0] == '*')
+        {
+            isActive = true;
+            stringstream nameSS;
+            nameSS << name;
+            
+            char asterisk;
+            nameSS >> asterisk;
+            
+            nameSS >> activeName;
+        }
+        
         // pull the health
         int health;
         ss >> health; // health = 10
@@ -95,10 +117,19 @@ string Trainer::makeMove(stringstream& situation) {
         // get max health
         int maxHealth;
         ss >> maxHealth; // maxHealth = 10
+        if(isActive)
+        {
+            activeHealth = health;
+            activeMaxHealth = maxHealth;
+            activeNum = i;
+        }
         
         // cout this info for testing purposes
         //cout << "Name: " << name << " health: " << health << "\n";
     }
+    
+    //cout for testing
+    //cout << "Active: #" << activeNum << " " << activeName << " " << activeHealth << "/" << activeMaxHealth << "\n";
     
     // This is something else you can do ONLY for testing.
     // In a previous post, I recommended #including CreatureType.h so that you

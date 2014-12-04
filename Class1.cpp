@@ -16,7 +16,7 @@
  * Effects:  runs a battle given the trainer, their party, the current
  situation, and the trainer's current win count
  */
-void decide(string enemyName, int health, int maxHealth)
+string decide(string name, int health, int maxHealth)
 {
-    
+    return "";
 }
