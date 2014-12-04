@@ -14,29 +14,28 @@ using namespace std;
 
 int Class1::getHighestHealth(int partyHealths[])
 {
-    int highestPos = 1;
+    int highestSlot = 1;
     int highestHealth = partyHealths[1];
     for(int i = 2; i < PARTY_SIZE; i++)
     {
         if(highestHealth < partyHealths[i])
         {
             highestHealth = partyHealths[i];
-            highestPos = i;
+            highestSlot = i;
         }
     }
-        
-    return highestPos;
+    return highestSlot;
 }
 
-string Class1::swap(int partyHealths[], int activePos)
+string Class1::swapToHighestHealth(int partyHealths[], int activeSlot)
 {
-    int swapPos = getHighestHealth(partyHealths);
+    int swapSlot = getHighestHealth(partyHealths);
     string response;
     
     //if swapping with other than itself
-    if(swapPos != activePos)
+    if(swapSlot != activeSlot)
     {
-        switch(swapPos)
+        switch(swapSlot)
         {
             case 1:
                 response = "s1";

@@ -24,7 +24,7 @@ public:
     /**
      * Requires: Nothing.
      * Modifies: Nothing.
-     * Effects:  Returns the position (1,2,3,4) of creature
+     * Effects:  Returns the slot (1,2,3,4) of creature
                  with highest health
      */
     int getHighestHealth(int partyHealths[]);
@@ -34,7 +34,22 @@ public:
      * Modifies: Nothing.
      * Effects:  Returns swap command based on which creature has highest health
      */
-    string swap(int partyHealths[], int activePos);
+    string swapToHighestHealth(int partyHealths[], int activeSlot);
+    
+    /**
+     * Requires: Nothing.
+     * Modifies: Nothing.
+     * Effects:  Returns true if enemy attack will deplete active creature's health next turn
+                 Otherwise false
+     */
+    bool isGonnaDie(int activeSlot, int enemyATK);
+    
+    /**
+     * Requires: Nothing.
+     * Modifies: Nothing.
+     * Effects:  Returns true if enemy attack will deplete active creature's health next turn
+     Otherwise false
+     */
 };
 
 // ^^^^^^ And this line. That's it!

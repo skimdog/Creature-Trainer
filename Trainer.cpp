@@ -41,7 +41,7 @@ string Trainer::makeMove(stringstream& situation) {
     int pipeLine = -1;
     // lines.size() tells us how many elements are in the vector<string> lines
     // In this case, it tells us how many lines we pulled in
-    for (int i=0; i<lines.size(); i++) {
+    for (int i = 0; i < lines.size(); i++) {
         // Store each line in the string line
         string line = lines[i];
         // Store the first char of line in the char c
@@ -54,8 +54,49 @@ string Trainer::makeMove(stringstream& situation) {
         }
     }
     
+    /*
     //PARSE OUT ENEMY DAMAGE
-    // <insert code>
+    string enemyAttackLine;
+    stringstream enemySS;
+
+    const int NUM_OF_SKIPS = 8; //number of words to skip before attack damage is read
+    
+    for (int i = 0; i < lines.size(); i++)
+    {
+        enemyAttackLine = lines[i];
+        
+        // Store the first char of line in the char c
+        char c = enemyAttackLine[0];
+        
+        //'E' for Enemy
+        if (c == 'E')
+        {
+            break;
+        }
+    }
+    enemySS << enemyAttackLine;
+    string skip;
+    for(int j = 0; j < NUM_OF_SKIPS; j++)
+    {
+        enemySS >> skip;
+        if(skip == "faints!" || skip == "rests")
+        {
+            break;
+        }
+    }
+    
+    int enemyATK;
+    if(skip == "faints!" || skip == "rests")
+    {
+        enemyATK = 0;
+    }
+    else
+    {
+        enemySS >> enemyATK;
+        cout << "Attack damage: " << enemyATK << "\n";
+    }
+    */
+    
     
     
     // Now that we know which line has the health, do something with it
@@ -78,7 +119,7 @@ string Trainer::makeMove(stringstream& situation) {
     
     
     //new array without first and last empty lines
-    //first element (0) is empty; the rest (1,2,3,4) are the four creatures
+    //first element (0) is empty; the rest (1,2,3,4) are four slots for four party creatures
     //to make it easier to comprehend
     const int PARTY_SIZE = 5;
     string creatureParty[PARTY_SIZE];
@@ -97,7 +138,7 @@ string Trainer::makeMove(stringstream& situation) {
     string activeName = "";
     int activeHealth = 0;
     //int activeMaxHealth = 0;
-    int activeNum = 0; // [1, 2, 3, 4]
+    int activeSlot = 0; // [1, 2, 3, 4]
     
     for (int i = 1; i < PARTY_SIZE; i++) {
         
@@ -147,7 +188,7 @@ string Trainer::makeMove(stringstream& situation) {
         {
             activeHealth = health;
             //activeMaxHealth = maxHealth;
-            activeNum = i;
+            activeSlot = i;
         }
     }
     
@@ -159,11 +200,6 @@ string Trainer::makeMove(stringstream& situation) {
     
     //cout for testing
     //cout << "Active: #" << activeNum << " " << activeName << " " << activeHealth << "/" << activeMaxHealth << "\n";
-    
-    //DECISION********************************************************************
-    
-    
-    
     
     // This is something else you can do ONLY for testing.
     // In a previous post, I recommended #including CreatureType.h so that you
@@ -203,7 +239,8 @@ string Trainer::makeMove(stringstream& situation) {
     Class1 class1;
     
     string response;
-    response = class1.swap(partyHealths, activeHealth);
+    //cin >> response;
+    response = class1.swapToHighestHealth(partyHealths, activeHealth);
     
     
     return response;
