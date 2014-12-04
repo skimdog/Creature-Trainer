@@ -10,3 +10,13 @@
 
 #include "Class1.h"
 
+/**
+ * Requires: Nothing.
+ * Modifies: Nothing.
+ * Effects:  runs a battle given the trainer, their party, the current
+ situation, and the trainer's current win count
+ */
+void decide(string enemyName, int health, int maxHealth)
+{
+    
+}
