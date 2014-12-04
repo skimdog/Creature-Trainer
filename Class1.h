@@ -15,7 +15,14 @@
 using namespace std;
 // vvvvvv Your implementations go between this line…
 
-
+class Class1{
+public:
+    static const int PARTY_SIZE = 5;
+    
+    int getHighestHealth(int list[]);
+    
+    string swap(int list[]);
+};
 
 // ^^^^^^ And this line. That's it!
 
