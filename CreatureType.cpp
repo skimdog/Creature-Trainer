@@ -10,13 +10,12 @@
 #include "EECSRandom.h"
 using namespace std;
 
-//awful names
 
 const string CreatureType::CREATURE_NAMES[] = { "Axolotyl", "Bittern", "C-lacanth",
     "Dugong", "Echidna", "Fossa", "Guanaco", "Honeybdgr", "Ibex", "Jackal",
     "Kiwi", "Loris", "Megapode", "Narwhal", "Ovenbird", "Pika", "Quagga",
     "RockHyrax", "Solenodon", "Tuatara", "Uromastyx", "Vaquita", "Wolverine",
-    "Xenops", "Yaminon", "Zebu" } ;
+    "Xenops", "Yaminon", "Zebu" };
 
 const string CreatureType::ELEMENT_NAMES[] = { "Air", "Bombast", "Cool", "Dark",
     "Earth", "Funk", "Gamma", "Hammer" };
@@ -34,7 +33,7 @@ CreatureType::CreatureType(int cType) {
 
 void CreatureType::randomizeTypes() {
     CreatureType::TYPES.resize(NUM_TYPES);
-    for (int i=0; i<NUM_TYPES; i++) {
+    for (int i = 0; i<NUM_TYPES; i++) {
         CreatureType ct;
         ct.setType(i);
         ct.randomizeType();
@@ -44,21 +43,25 @@ void CreatureType::randomizeTypes() {
 
 void CreatureType::randomizeType() {
     // Randomize the different CreatureType stats
-    int num = EECSRandom::range( healthMaxBaseMin, healthMaxBaseMax+1 );
+    int num = EECSRandom::range(healthMaxBaseMin, healthMaxBaseMax + 1);
     healthMaxBase = num;
-    num = EECSRandom::range( healthMaxPerLevelMin, healthMaxPerLevelMax+1 );
+    num = EECSRandom::range(healthMaxPerLevelMin, healthMaxPerLevelMax + 1);
     healthMaxPerLevel = num;
-    num = EECSRandom::range( healthRestIncreaseMin, healthRestIncreaseMax+1 );
+    num = EECSRandom::range(healthRestIncreaseMin, healthRestIncreaseMax + 1);
     healthRestIncrease = num;
-    num = EECSRandom::range( attackBaseMin, attackBaseMax+1 );
+    num = EECSRandom::range(attackBaseMin, attackBaseMax + 1);
     if (num % 2 == 1) num--;
     attackBase = num;
-    num = EECSRandom::range( attackPerLevelMin, attackPerLevelMax+1 );
+    num = EECSRandom::range(attackPerLevelMin, attackPerLevelMax + 1);
     attackPerLevel = num;
     
-    elementalAttackType = EECSRandom::range( 0, NUM_ELEMENTS );
-    elementalWeakness   = EECSRandom::range( 0, NUM_ELEMENTS );
-    elementalStrength   = EECSRandom::range( 0, NUM_ELEMENTS );
+    elementalAttackType = EECSRandom::range(0, NUM_ELEMENTS);
+    elementalWeakness = EECSRandom::range(0, NUM_ELEMENTS);
+    elementalStrength = EECSRandom::range(0, NUM_ELEMENTS);
+    //Reroll if elementalWeakness == elementalStrength
+    while (elementalWeakness == elementalStrength){
+        elementalStrength = EECSRandom::range(0, NUM_ELEMENTS);
+    }
 }
 
 string CreatureType::typeName(int tN, int pad) {
@@ -67,7 +70,7 @@ string CreatureType::typeName(int tN, int pad) {
     while (name.length() < pad) {
         name += " ";
     }
-    return( name );
+    return(name);
 }
 
 string CreatureType::elementName(int eN, int pad) {
@@ -76,7 +79,7 @@ string CreatureType::elementName(int eN, int pad) {
     while (name.length() < pad) {
         name += " ";
     }
-    return( name );
+    return(name);
 }
 
 int CreatureType::getType() {

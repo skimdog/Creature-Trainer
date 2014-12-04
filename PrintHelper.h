@@ -19,18 +19,17 @@ public:
      * Modifies: ss
      * Effects:  Prints out the current party in this format:
      
-| *Uromastyx  17/17 | Zebu       19/19 | Echidna    13/13 | Ibex       19/19   |
+     | *Uromastyx  17/17 | Zebu       19/19 | Echidna    13/13 | Ibex       19/19   |
      
      */
     static void printTeamStatus(Creature creatures[], int currCreatureIndex, stringstream & ss);
-
+    
     /**
      * Requires: Nothing.
      * Modifies: ss
      * Effects:  Prints out a single creature in this format:
-    
+     
      | *Uromastyx  17/17
-
      */
     static void printSingleCreature(Creature& c, bool current, stringstream& ss);
     
@@ -40,22 +39,22 @@ public:
      * Effects:  prints an error if the player chooses an invalid move
      */
     static void printError(stringstream& ss);
-
+    
     /**
      * Requires: Nothing.
      * Modifies: ss
      * Effects:  Prints explanation of valid keyboard commands during battle
      */
     static void printOptions(stringstream & ss);
-
+    
     /**
-    * Requires: Nothing.
-    * Modifies: ss
-    * Effects:  Prints shorter explanation of valid keyboard commands during
-    *           battle
-    */
+     * Requires: Nothing.
+     * Modifies: ss
+     * Effects:  Prints shorter explanation of valid keyboard commands during
+     *           battle
+     */
     static void printBattleOptions(stringstream & ss);
-
+    
     /**
      * Requires: Nothing.
      * Modifies: ss
@@ -67,16 +66,13 @@ public:
      * Requires: Nothing.
      * Modifies: ss
      * Effects:  Prints the situation of a creature attacking in the format:
-
      Your  C-lacanth attacks Enemy Megapode  with Hammer  for 6 damage.
-
-    or
+     or
      
      Enemy Megapode  attacks Your  C-lacanth with Earth   for 4 damage.
-
      */
     static void printPlayerAttack(Creature &attacker, string &receiverName, stringstream & ss);
-
+    
     /**
      * Requires: Nothing.
      * Modifies: ss
@@ -89,7 +85,7 @@ public:
      * Modifies: ss
      * Effects:  Prints an 80-character wide horizontal line
      
---------------------------------------------------------------------------------
+     --------------------------------------------------------------------------------
      
      */
     static void printHR(stringstream& ss);
@@ -99,7 +95,7 @@ public:
      * Modifies: ss
      * Effects:  Prints an 80-character wide horizontal underscore line
      
-________________________________________________________________________________
+     ________________________________________________________________________________
      
      */
     static void printHRL(stringstream& ss);

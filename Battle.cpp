@@ -11,13 +11,13 @@
 using namespace std;
 
 //to run a battle
-//we need a trainer, 
-//their party, 
+//we need a trainer,
+//their party,
 //the situation stream,
 //and their win count
-  //the battle is a series of informative outputs of situations
+//the battle is a series of informative outputs of situations
 void runBattle(Trainer &player1, Party &party, stringstream& ss, int winCount){
-  
+    
     
     // WHAT SHOULD THE ENEMIES BE?? This generates an enemy
     int tNum = EECSRandom::range(0,CreatureType::NUM_TYPES);
@@ -41,7 +41,7 @@ void runBattle(Trainer &player1, Party &party, stringstream& ss, int winCount){
         }
         
         PrintHelper::printBattleOptions(ss);
-       
+        
         // Ask the player for her next move…
         playerMove = player1.makeMove(ss);
         ss.str("");
@@ -57,26 +57,26 @@ void runBattle(Trainer &player1, Party &party, stringstream& ss, int winCount){
                 
             case 's': // Swap for another party member
                 // You cannot swap to a fainted party member
-                {
-                    int oldIndex = party.getActiveCreatureNum();
-                    int swapIndex = playerMove[1] - '1'; //because atoi won't work
-                    if (swapIndex >= Party::MAX_PARTY_SIZE || swapIndex < 0) {
-                        PrintHelper::printError(ss);
+            {
+                int oldIndex = party.getActiveCreatureNum();
+                int swapIndex = playerMove[1] - '1'; //because atoi won't work
+                if (swapIndex >= Party::MAX_PARTY_SIZE || swapIndex < 0) {
+                    PrintHelper::printError(ss);
+                } else {
+                    party.setActiveCreatureNum(swapIndex);
+                    if (party.getActiveCreatureNum() == oldIndex) {
+                        ss << party.creatures[swapIndex].getTypeName();
+                        ss << " couldn't swap in! ";
+                        ss << party.creatures[oldIndex].getTypeName();
+                        ss << " is still fighting.\n";
                     } else {
-                        party.setActiveCreatureNum(swapIndex);
-                        if (party.getActiveCreatureNum() == oldIndex) {
-                            ss << party.creatures[swapIndex].getTypeName();
-                            ss << " couldn't swap in! ";
-                            ss << party.creatures[oldIndex].getTypeName();
-                            ss << " is still fighting.\n";
-                        } else {
-                            ss << party.creatures[oldIndex].getTypeName();
-                            ss << " swaps out, and ";
-                            ss << party.creatures[swapIndex].getTypeName();
-                            ss << " swaps in!\n";
-                        }
+                        ss << party.creatures[oldIndex].getTypeName();
+                        ss << " swaps out, and ";
+                        ss << party.creatures[swapIndex].getTypeName();
+                        ss << " swaps in!\n";
                     }
                 }
+            }
                 break;
                 
             case 'r': // Rest and regain a bit of health. Usually a bad move.
@@ -117,7 +117,7 @@ void creatureAttack(Creature& attacker, Creature& defender, bool isPlayer, strin
     int aStrength = attacker.getAttackStrength();
     int aElement = attacker.getAttackElement();
     
-   
+    
     
     string aName, dName;
     if (isPlayer) {
@@ -139,9 +139,9 @@ void creatureAttack(Creature& attacker, Creature& defender, bool isPlayer, strin
         ss << " with " << CreatureType::elementName(aElement);
         ss << " for " << damageDone << " damage.\n";
     }
-
-
-   
+    
+    
+    
     
     if (defender.getHealthCurr() == 0) {
         ss << dName << " faints!\n";
@@ -170,6 +170,4 @@ void creatureRest(Creature& rester, bool isPlayer, stringstream& ss) {
     
     ss << resterName << " rests and regains ";
     ss << increase << " health.\n";
-    
-    rester.rest();
 }

@@ -10,12 +10,19 @@
 #include "Creature.h"
 #include "EECSRandom.h"
 #include "PrintHelper.h"
+#include <unordered_set>
 
 Party::Party() {
     // Makes a random Party of Creatures
+    std::unordered_set<int> typesAlreadyUsed;
     for (int i=0; i<MAX_PARTY_SIZE; i++) {
-        // TODO: Make sure the Trainer doesn't get two of the same CreatureType
-        creatures[i] = Creature::factory(EECSRandom::range(0, CreatureType::NUM_TYPES));
+        int nextType = EECSRandom::range(0, CreatureType::NUM_TYPES);
+        //while we already have a pokemon of that type get a new type
+        while (typesAlreadyUsed.count(nextType)){
+            nextType = EECSRandom::range(0, CreatureType::NUM_TYPES);
+        }
+        creatures[i] = Creature::factory(nextType);
+        typesAlreadyUsed.insert(nextType);
     }
     
 }
@@ -67,6 +74,5 @@ void Party::restInactive() {
         }
     }
 }
-
 
 

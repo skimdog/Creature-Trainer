@@ -6,6 +6,7 @@
 //  Use of these classes is optional. You may use none or any or all of them. 
 //  You still may NOT #include any.h files we provide you
 //  (Battle, Creature, CreatureType, EECSRandom, Party, PrintHelper)
-//
+//  
 
 #include "Class1.h"
+

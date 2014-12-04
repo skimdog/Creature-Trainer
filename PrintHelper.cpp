@@ -27,44 +27,43 @@ void PrintHelper::printIntro(stringstream & ss) {
 
 
 void PrintHelper::printTeamStatus(Creature creatures[], int currCreatureIndex, stringstream& ss) {
-
-	if (currCreatureIndex == 0)
-		printSingleCreature(creatures[0], true, ss);
-	else
-		printSingleCreature(creatures[0], false, ss);
-
-	if (currCreatureIndex == 1)
-		printSingleCreature(creatures[1], true, ss);
-	else
-		printSingleCreature(creatures[1], false, ss);
-
-	if (currCreatureIndex == 2)
-		printSingleCreature(creatures[2], true, ss);
-	else
-		printSingleCreature(creatures[2], false, ss);
-
-	if (currCreatureIndex == 3)
-		printSingleCreature(creatures[3], true, ss);
-	else
-		printSingleCreature(creatures[3], false, ss);
+    
+    if (currCreatureIndex == 0)
+        printSingleCreature(creatures[0], true, ss);
+    else
+        printSingleCreature(creatures[0], false, ss);
+    
+    if (currCreatureIndex == 1)
+        printSingleCreature(creatures[1], true, ss);
+    else
+        printSingleCreature(creatures[1], false, ss);
+    
+    if (currCreatureIndex == 2)
+        printSingleCreature(creatures[2], true, ss);
+    else
+        printSingleCreature(creatures[2], false, ss);
+    
+    if (currCreatureIndex == 3)
+        printSingleCreature(creatures[3], true, ss);
+    else
+        printSingleCreature(creatures[3], false, ss);
     
     ss << "  |\n";
 }
 
 
 void PrintHelper::printSingleCreature(Creature& c, bool current, stringstream& ss) {
-	ss << "|";
-    ss << "LV" << c.getLevel();
-	if ( current ) {
-		ss << " *";
-	} else {
-		ss << " ";
-	}
+    ss << "|";
+    if ( current ) {
+        ss << " *";
+    } else {
+        ss << " ";
+    }
     // 10 char wide for name, filled with spaces by c.getTypeName()
     ss << c.getTypeName(10);
-
-	// space, then current/max health
-	ss << " " << c.getHealthCurr() << "/" << CreatureType::TYPES[c.getType()].getHealthMaxBase() << " ";
+    
+    // space, then current/max health
+    ss << " " << c.getHealthCurr() << "/" << CreatureType::TYPES[c.getType()].getHealthMaxBase() << " ";
 }
 
 
@@ -89,12 +88,12 @@ void PrintHelper::printBattleOptions(stringstream & ss){
 
 void PrintHelper::printEnd(int count, stringstream & ss) {
     ss << "\nSadly, your entire party of creatures has fallen in battle.\n";
-	ss << "You won " << count;
-	if (count == 1)
-		ss << " battle today.\n\n";
-	else
-		ss << " battles today.\n\n";
-
+    ss << "You won " << count;
+    if (count == 1)
+        ss << " battle today.\n\n";
+    else
+        ss << " battles today.\n\n";
+    
 }
 
 
@@ -123,6 +122,4 @@ void PrintHelper::printHRL(stringstream& ss) {
     ss << "________________________________________";
     ss << "________________________________________\n";
 }
-
-
 
