@@ -12,31 +12,31 @@
 #include <iostream>
 using namespace std;
 
-int Class1::getHighestHealth(int list[])
+int Class1::getHighestHealth(int partyHealths[])
 {
-    int highPos = 1;
-    int highestHealth = list[1];
+    int highestPos = 1;
+    int highestHealth = partyHealths[1];
     for(int i = 2; i < PARTY_SIZE; i++)
     {
-        if(highestHealth < list[i])
+        if(highestHealth < partyHealths[i])
         {
-            highestHealth = list[i];
-            highPos = i;
+            highestHealth = partyHealths[i];
+            highestPos = i;
         }
     }
         
-    return highPos;
+    return highestPos;
 }
 
-string Class1::swap(int list[], int activeNum)
+string Class1::swap(int partyHealths[], int activePos)
 {
-    int swapNum = getHighestHealth(list);
+    int swapPos = getHighestHealth(partyHealths);
     string response;
     
-    
-    if(swapNum != activeNum)
+    //if swapping with other than itself
+    if(swapPos != activePos)
     {
-        switch(swapNum)
+        switch(swapPos)
         {
             case 1:
                 response = "s1";
@@ -52,6 +52,7 @@ string Class1::swap(int list[], int activeNum)
                 break;
         }
     }
+    //otherwise
     else
     {
         response = "a";

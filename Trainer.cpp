@@ -54,7 +54,6 @@ string Trainer::makeMove(stringstream& situation) {
         }
     }
     
-    
     //PARSE OUT ENEMY DAMAGE
     // <insert code>
     
@@ -77,20 +76,24 @@ string Trainer::makeMove(stringstream& situation) {
     // We do 1 to <creatureHealthBits.size()-1 because we only need the middle
     //    four elements (and are skipping the empty ones.
     
-    //new array without first and last lines
-    //first element is empty, so that we can refer the four party members to their position (1, 2, 3, 4)
+    
+    //new array without first and last empty lines
+    //first element (0) is empty; the rest (1,2,3,4) are the four creatures
+    //to make it easier to comprehend
     const int PARTY_SIZE = 5;
     string creatureParty[PARTY_SIZE];
-    for(int j = 1; j < creatureHealthBits.size() - 1; j++)
+    
+    for(int j = 1; j < PARTY_SIZE; j++)
     {
         creatureParty[j] = creatureHealthBits[j];
     }
     
+    //storing names and current healths separately
     string partyNames[PARTY_SIZE];
     int partyHealths[PARTY_SIZE];
     
-    
-    bool isActive;
+    //storing info about active creature
+    bool isActive; //true when name starts with '*'
     string activeName = "";
     int activeHealth = 0;
     //int activeMaxHealth = 0;
@@ -98,7 +101,7 @@ string Trainer::makeMove(stringstream& situation) {
     
     for (int i = 1; i < PARTY_SIZE; i++) {
         
-        isActive = false; // default
+        isActive = false;
         // cout just for testing
         //cout << creatureHealthBits[i] << "\n";
         
@@ -115,7 +118,7 @@ string Trainer::makeMove(stringstream& situation) {
         if(name[0] == '*')
         {
             isActive = true;
-            stringstream nameSS;
+            stringstream nameSS; //just to remove asterisk from name
             nameSS << name;
             
             char asterisk;
@@ -129,7 +132,6 @@ string Trainer::makeMove(stringstream& situation) {
         // pull the health
         int health;
         ss >> health; // health = 10
-        
         partyHealths[i] = health;
         
         // Get rid of the slash char
@@ -139,6 +141,8 @@ string Trainer::makeMove(stringstream& situation) {
         // get max health
         //int maxHealth;
         //ss >> maxHealth; // maxHealth = 10
+        
+        //if this creature is active
         if(isActive)
         {
             activeHealth = health;

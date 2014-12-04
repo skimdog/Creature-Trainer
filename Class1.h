@@ -11,17 +11,30 @@
 
 #ifndef __CreatureTrainer__Class1__
 #define __CreatureTrainer__Class1__
+
 #include <iostream>
 using namespace std;
 // vvvvvv Your implementations go between this line…
 
+//maybe "SwapOrAttack"?
 class Class1{
 public:
     static const int PARTY_SIZE = 5;
     
-    int getHighestHealth(int list[]);
+    /**
+     * Requires: Nothing.
+     * Modifies: Nothing.
+     * Effects:  Returns the position (1,2,3,4) of creature
+                 with highest health
+     */
+    int getHighestHealth(int partyHealths[]);
     
-    string swap(int list[], int activeHealth);
+    /**
+     * Requires: Nothing.
+     * Modifies: Nothing.
+     * Effects:  Returns swap command based on which creature has highest health
+     */
+    string swap(int partyHealths[], int activePos);
 };
 
 // ^^^^^^ And this line. That's it!
