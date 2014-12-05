@@ -17,17 +17,13 @@ using namespace std;
 // vvvvvv Your implementations go between this line…
 
 //maybe "SwapOrAttack"?
-class Class1{
+
+
+class Class1 {
 public:
     static const int PARTY_SIZE = 5;
     
-    /**
-     * Requires: Nothing.
-     * Modifies: Nothing.
-     * Effects:  Returns the slot (1,2,3,4) of creature
-                 with highest health
-     */
-    int getHighestHealth(int partyHealths[]);
+ 
     
     /**
      * Requires: Nothing.
@@ -51,7 +47,29 @@ public:
                  one of other creatures besides active one
      */
     bool areOthersGonnaDie(int partyHealths[], int partyDamages[]);
+    
+private:
+    
+    /**
+     * Requires: Nothing.
+     * Modifies: Nothing.
+     * Effects:  Returns the slot (1,2,3,4) of creature
+     with highest health
+     */
+    int getHighestHealth(int partyHealths[]);
+    
 };
+
+
+/**
+ * Requires: Nothing.
+ * Modifies: Nothing.
+ * Effects:  runs a battle given the trainer, their party, the current
+ situation, and the trainer's current win count
+ */
+
+
+
 
 // ^^^^^^ And this line. That's it!
 

@@ -55,7 +55,15 @@ int main(int argc, const char * argv[]) {
     
     while (trainerParty.alive()) {
         battlesWon++;
+        
+        
+        
+        
         // Create the situation
+        
+        
+        
+        
         runBattle(player, trainerParty, ss, battlesWon);
     }
     
