@@ -54,8 +54,29 @@ string Trainer::makeMove(stringstream& situation) {
         }
     }
     
-    /*
-    //PARSE OUT ENEMY DAMAGE
+    //PARSE OUT IS START OF BATTLE
+    
+    string newBattleLine;
+    for (int i = 0; i < lines.size(); i++)
+    {
+        newBattleLine = lines[i];
+        
+        // Store the first char of line in the char c
+        char c1 = newBattleLine[0];
+        char c2 = newBattleLine[1];
+        char c3 = newBattleLine[2];
+        
+        //'E' for Enemy
+        if (c1 == 'I' && c2 == 't' && c3 == '\'')
+        {
+            isStartofBattle = true;
+        }
+        
+    }
+    
+    
+    
+ 
     string enemyAttackLine;
     stringstream enemySS;
 
@@ -95,7 +116,7 @@ string Trainer::makeMove(stringstream& situation) {
         enemySS >> enemyATK;
         cout << "Attack damage: " << enemyATK << "\n";
     }
-    */
+    
     
     
     
@@ -238,11 +259,18 @@ string Trainer::makeMove(stringstream& situation) {
     
     Class1 class1;
     
+    
     string response;
     //cin >> response;
-    response = class1.swapToHighestHealth(partyHealths, activeHealth);
+    if (isStartofBattle){
+        response = class1.swapToHighestHealth(partyHealths, activeHealth);
+    }
+    if (!class1.isGonnaDie(activeHealth, enemyATK)){
+        response = 'a';
+    }
+        else {response = class1.swapToHighestHealth(partyHealths, activeHealth);}
     
-    
+    isStartofBattle = false;
     return response;
 }
 

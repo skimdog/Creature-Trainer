@@ -45,7 +45,7 @@ private:
     // vvvvvv Your changes to Trainer.h go between this line…
     
     
-    
+    bool isStartofBattle;
     
     
     // ^^^^^^ And this line. That's it!
