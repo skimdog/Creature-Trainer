@@ -50,6 +50,7 @@ public:
      * Effects:  Returns true if enemy attack will deplete active creature's health next turn
      Otherwise false
      */
+    
 };
 
 // ^^^^^^ And this line. That's it!

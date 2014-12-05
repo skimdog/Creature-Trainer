@@ -59,3 +59,11 @@ string Class1::swapToHighestHealth(int partyHealths[], int activeSlot)
     return response;
 }
 
+bool isGonnaDie(int activeHealth, int enemyATK){
+    if (activeHealth <= enemyATK)
+    {
+        return true;
+    }
+    else {return false;}
+}
+
