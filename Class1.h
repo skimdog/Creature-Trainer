@@ -39,20 +39,18 @@ public:
     /**
      * Requires: Nothing.
      * Modifies: Nothing.
-     * Effects:  Returns true if enemy attack will deplete active creature's health next turn
+     * Effects:  Returns true if enemy attack next turn will deplete active creature's health
                  Otherwise false
      */
-    bool isGonnaDie(int activeSlot, int enemyATK);
+    bool isGonnaDie(int health, int enemyATK);
     
     /**
      * Requires: Nothing.
      * Modifies: Nothing.
-     * Effects:  Returns true if enemy attack will deplete active creature's health next turn
-     Otherwise false
+     * Effects:  Returns true if enemy attack two turns later will deplete health of any 
+                 one of other creatures besides active one
      */
-    
-   
-    
+    bool areOthersGonnaDie(int partyHealths[], int partyDamages[]);
 };
 
 // ^^^^^^ And this line. That's it!

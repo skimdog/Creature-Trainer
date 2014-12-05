@@ -31,7 +31,7 @@ string Class1::swapToHighestHealth(int partyHealths[], int activeSlot)
 {
     int swapSlot = getHighestHealth(partyHealths);
     string response;
-    
+
     //if swapping with other than itself
     if(swapSlot != activeSlot)
     {
@@ -59,11 +59,29 @@ string Class1::swapToHighestHealth(int partyHealths[], int activeSlot)
     return response;
 }
 
-bool Class1::isGonnaDie(int activeHealth, int enemyATK){
-    if (activeHealth <= enemyATK)
+bool Class1::isGonnaDie(int health, int enemyATK)
+{
+    if (health <= enemyATK)
     {
         return true;
     }
-    else {return false;}
+    else
+    {
+        return false;
+    }
+}
+
+bool Class1::areOthersGonnaDie(int partyHealths[], int partyDamages[])
+{
+    for(int i = 1; i < PARTY_SIZE; i++)
+    {
+        //hypothesizing future health one turn later
+        int remainHealth = partyHealths[i] - partyDamages[i];
+        if(!isGonnaDie(remainHealth, partyDamages[i]))
+        {
+            return false;
+        }
+    }
+    return true;
 }
 

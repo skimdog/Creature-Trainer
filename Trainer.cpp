@@ -26,6 +26,8 @@ using namespace std;
 
 string Trainer::makeMove(stringstream& situation) {
     
+    isStartofBattle = false; //default
+    
     // pull the entire string out of stringStream& situation
     string situationString = situation.str();
     // situationString now includes ALL of the lines that will be sent to cout
@@ -53,75 +55,28 @@ string Trainer::makeMove(stringstream& situation) {
             pipeLine = i;
         }
     }
+    // Now that we know which line has the health, do something with it
+    //cout << lines[pipeLine] << "\n"; // Output for testing only
     
-    //PARSE OUT IS START OF BATTLE
     
+    // * DETERMINES WHETHER NEW BATTLE HAS STARTED *
     string newBattleLine;
+    
+    //looking for the line "It's an enemy..."
     for (int i = 0; i < lines.size(); i++)
     {
         newBattleLine = lines[i];
         
-        // Store the first char of line in the char c
+        // Store the first three chars (It') of the line
         char c1 = newBattleLine[0];
         char c2 = newBattleLine[1];
         char c3 = newBattleLine[2];
         
-        //'E' for Enemy
         if (c1 == 'I' && c2 == 't' && c3 == '\'')
         {
             isStartofBattle = true;
         }
-        
     }
-    
-    
-    
- 
-    string enemyAttackLine;
-    stringstream enemySS;
-
-    const int NUM_OF_SKIPS = 8; //number of words to skip before attack damage is read
-    
-    for (int i = 0; i < lines.size(); i++)
-    {
-        enemyAttackLine = lines[i];
-        
-        // Store the first char of line in the char c
-        char c = enemyAttackLine[0];
-        
-        //'E' for Enemy
-        if (c == 'E')
-        {
-            break;
-        }
-    }
-    enemySS << enemyAttackLine;
-    string skip;
-    for(int j = 0; j < NUM_OF_SKIPS; j++)
-    {
-        enemySS >> skip;
-        if(skip == "faints!" || skip == "rests")
-        {
-            break;
-        }
-    }
-    
-    int enemyATK;
-    if(skip == "faints!" || skip == "rests")
-    {
-        enemyATK = 0;
-    }
-    else
-    {
-        enemySS >> enemyATK;
-        cout << "Attack damage: " << enemyATK << "\n";
-    }
-    
-    
-    
-    
-    // Now that we know which line has the health, do something with it
-    //cout << lines[pipeLine] << "\n"; // Output for testing only
     
     // Split the party health line by pipes "|"
     vector<string> creatureHealthBits = splitString(lines[pipeLine], "|");
@@ -139,20 +94,16 @@ string Trainer::makeMove(stringstream& situation) {
     //    four elements (and are skipping the empty ones.
     
     
-    //new array without first and last empty lines
+    // * INITIALIZE creatureParty *
     //first element (0) is empty; the rest (1,2,3,4) are four slots for four party creatures
     //to make it easier to comprehend
-    const int PARTY_SIZE = 5;
-    string creatureParty[PARTY_SIZE];
     
     for(int j = 1; j < PARTY_SIZE; j++)
     {
         creatureParty[j] = creatureHealthBits[j];
     }
     
-    //storing names and current healths separately
-    string partyNames[PARTY_SIZE];
-    int partyHealths[PARTY_SIZE];
+    //* STORING NAMES AND CURRENT HEALTHS IN partyNames & partyHealths *
     
     //storing info about active creature
     bool isActive; //true when name starts with '*'
@@ -212,6 +163,59 @@ string Trainer::makeMove(stringstream& situation) {
             activeSlot = i;
         }
     }
+
+    // * STORE ENEMY ATTACK DAMAGE for active creature *
+    
+    string enemyAttackLine;
+    stringstream enemySS;
+    const int NUM_OF_SKIPS = 8; //number of words to skip before attack damage is read
+    
+    for (int i = 0; i < lines.size(); i++)
+    {
+        enemyAttackLine = lines[i];
+        
+        // Store the first char of line in the char c
+        char c1 = enemyAttackLine[0];
+        char c2 = enemyAttackLine[1];
+        
+        //'E' for Enemy
+        if (c1 == 'E' && c2 == 'n')
+        {
+            break;
+        }
+    }
+    enemySS << enemyAttackLine;
+    int enemyATK = 0;
+    string skip;
+    
+    if(isStartofBattle)
+    {
+        //sets partyDamages to default
+        for(int i = 1; i < PARTY_SIZE; i++)
+        {
+            partyDamages[i] = 0;
+        }
+    }
+    else
+    {
+        for(int j = 0; j < NUM_OF_SKIPS; j++)
+        {
+            enemySS >> skip;
+        }
+        enemySS >> enemyATK;
+        partyDamages[activeSlot] = enemyATK;
+        //cout << "Attack damage: " << enemyATK << "\n";
+    }
+    
+    
+    //testing only
+    /*
+    for(int i = 1; i < PARTY_SIZE; i++)
+    {
+        cout << partyNames[i] << " gets damaged by " << partyDamages[i] << "\n";
+    }
+    */
+
     
     //cout for testing
     //for (int i = 1; i < PARTY_SIZE; i++)
@@ -257,20 +261,42 @@ string Trainer::makeMove(stringstream& situation) {
      * generate a response string.
      */
     
-    Class1 class1;
     
+    //THE DECISION BEGINS HERE!!!
+    Class1 class1;
     
     string response;
     //cin >> response;
-    if (isStartofBattle){
-        response = class1.swapToHighestHealth(partyHealths, activeHealth);
+    
+    //every start of battle, swap
+    if (isStartofBattle)
+    {
+        response = class1.swapToHighestHealth(partyHealths, activeSlot);
+        return response;
     }
-    if (!class1.isGonnaDie(activeHealth, enemyATK)){
+    
+    if (!class1.isGonnaDie(activeHealth, enemyATK))
+    {
         response = 'a';
     }
-        else {response = class1.swapToHighestHealth(partyHealths, activeHealth);}
-    
-    isStartofBattle = false;
+    else
+    {
+        response = class1.swapToHighestHealth(partyHealths, activeSlot);
+        
+        //if next turn any one of other creatures will swap, thus making swapping to loop infinite!
+        if(class1.areOthersGonnaDie(partyHealths, partyDamages))
+        {
+            //just risk it!
+            response = 'a';
+            
+            //if active already fainted
+            if(activeHealth == 0)
+            {
+                //send other to the front line anyway
+                response = class1.swapToHighestHealth(partyHealths, activeSlot);
+            }
+        }
+    }
     return response;
 }
 
@@ -279,7 +305,6 @@ void Trainer::finalSituation(stringstream& situation) {
     cout << situation.str();
     
 }
-
 
 
 vector<string> Trainer::splitString(string inString, string splitOn) {
