@@ -6,21 +6,22 @@
 //  Copyright (c) 2014 Jeremy Richard Gibson. All rights reserved.
 //
 
+#include <vector>
 #include "CreatureType.h"
 #include "EECSRandom.h"
 using namespace std;
 
 
 const string CreatureType::CREATURE_NAMES[] = { "Axolotyl", "Bittern", "C-lacanth",
-    "Dugong", "Echidna", "Fossa", "Guanaco", "Honeybdgr", "Ibex", "Jackal",
-    "Kiwi", "Loris", "Megapode", "Narwhal", "Ovenbird", "Pika", "Quagga",
-    "RockHyrax", "Solenodon", "Tuatara", "Uromastyx", "Vaquita", "Wolverine",
-    "Xenops", "Yaminon", "Zebu" };
+"Dugong", "Echidna", "Fossa", "Guanaco", "Honeybdgr", "Ibex", "Jackal",
+"Kiwi", "Loris", "Megapode", "Narwhal", "Ovenbird", "Pika", "Quagga",
+"RockHyrax", "Solenodon", "Tuatara", "Uromastyx", "Vaquita", "Wolverine",
+"Xenops", "Yaminon", "Zebu" };
 
 const string CreatureType::ELEMENT_NAMES[] = { "Air", "Bombast", "Cool", "Dark",
-    "Earth", "Funk", "Gamma", "Hammer" };
+"Earth", "Funk", "Gamma", "Hammer" };
 
-std::vector<CreatureType> CreatureType::TYPES = {};
+std::vector<CreatureType> CreatureType::TYPES;
 
 CreatureType::CreatureType() {
     // Do nothing
@@ -32,7 +33,8 @@ CreatureType::CreatureType(int cType) {
 }
 
 void CreatureType::randomizeTypes() {
-    CreatureType::TYPES.resize(NUM_TYPES);
+    vector<int>::size_type num_types = NUM_TYPES;
+    CreatureType::TYPES.resize(num_types);
     for (int i = 0; i<NUM_TYPES; i++) {
         CreatureType ct;
         ct.setType(i);
@@ -54,7 +56,7 @@ void CreatureType::randomizeType() {
     attackBase = num;
     num = EECSRandom::range(attackPerLevelMin, attackPerLevelMax + 1);
     attackPerLevel = num;
-    
+
     elementalAttackType = EECSRandom::range(0, NUM_ELEMENTS);
     elementalWeakness = EECSRandom::range(0, NUM_ELEMENTS);
     elementalStrength = EECSRandom::range(0, NUM_ELEMENTS);

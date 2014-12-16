@@ -16,12 +16,14 @@
 class Creature{
 private:
     int type; // Creature's type
-    int healthCurr; //- Current amount of health. If healthCurr reaches 0, the creature faints.
-    int healthMax; // - Max amount of health
-    int level; 	// (REACH) The numerical level of the creature. Starts at 0.
-    int xp; // (REACH) The amount of experience that this creature has
+    int healthCurr; // Current amount of health. If healthCurr reaches 0, the creature faints.
+    int healthMax; // Max amount of health
+    //--Reach--
+    int level; 	// The numerical level of the creature. Starts at 0.
+    int xp; // The amount of experience that this creature has
     
 public:
+    const static int WINS_TO_LEVEL = 10;
 
     /**
     * Requires: Nothing.
@@ -32,10 +34,11 @@ public:
         
     /**
      * Requires: cType must be in the range [0, NUM_TYPES).
-     * Modifies: CreatureType data.
-     * Effects:  Randomizes the various stats for this CreatureType.
+     * Modifies: type
+     * Effects:  Creates a creature of given creatureType
+     *           with indicated level.
      */
-    static Creature factory(int cType);
+    static Creature factory(int cType, int level_in = 0);
     
     /**
      * Requires: Nothing.
@@ -86,7 +89,21 @@ public:
      */
     void setHealthCurr(int num);
     
-    
+    /**
+    * Requires: Nothing.
+    * Modifies: Nothing.
+    * Effects:  Gets and returns healthMax.
+    */
+    int getHealthMax();
+
+
+    /**
+    * Requires: num is in the range [0, healthMax]
+    * Modifies: healthMax
+    * Effects:  Sets healthMax to int passed in
+    */
+    void setHealthMax(int num);
+
     /**
      * Requires: Nothing.
      * Modifies: Increases health.
@@ -169,9 +186,35 @@ public:
      * Modifies: Sets xp.
      * Effects:  Nothing.
      */
+     //POSSIBLY DELETE
     void setXp(int num);
 
-    };
+    /**
+     * Requires: The two creatures exist
+     * Modifies: Nothing.
+     * Effects:  Checks if the creatures are the same.
+     */
+    bool operator==(const Creature& other);
+
+    /**
+    * Requires: battle won
+    * Modifies: xp
+    * Effects: increments xp. If xp == 10, calls updateLevel() 
+    *          and resets xp to 0
+    *          Returns true if level increases
+    */
+    bool updateXP();
+
+    /**
+    * Requires: xp == 10
+    * Modifies: level, healthMax
+    * Effects: increments level iff less than 9. Increases
+    *          maxHealth by CreatureType's maxHealthPerLevel
+    *          NOTE: attack stats updated in getAttackStrength()
+    *          Returns true if level increases
+    */
+    bool updateLevel();
+};
 
 
 #endif /* defined(__CreatureTrainer__Creature__) */

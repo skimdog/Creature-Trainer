@@ -14,9 +14,38 @@
 
 // vvvvvv Your implementations go between this line…
 
+#include <iostream>
+using namespace std;
 
-
-
+class Capture{
+public:
+    
+    static const int PARTY_SIZE = 5;
+    
+    /**
+     * Requires: Nothing.
+     * Modifies: Nothing.
+     * Effects:  Default constructor
+     */
+    Capture();
+    
+    /**
+     * Requires: Nothing.
+     * Modifies: Nothing.
+     * Effects:  Returns specific capture response (co1, co2,...) based on which party Creature is least useful
+     */
+    void captureCreature(int enemyMaxHealth, int enemyAttack, int partyHealths[], int partyAttacks[], string& response);
+    
+private:
+    
+    /**
+     * Requires: Nothing.
+     * Modifies: Nothing.
+     * Effects:  Returns slot of the least useful Creature in the party, based on sum of its health & attack
+     */
+    int getLeastUsefulSlot(int partyHealths[], int partyAttacks[]);
+    
+};
 
 // ^^^^^^ And this line. That's it!
 

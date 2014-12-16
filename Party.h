@@ -19,6 +19,9 @@ public:
 
     Creature creatures[MAX_PARTY_SIZE];
     
+    int attackBoostTurns;
+    int defenseBoostTurns;
+    
     /**
      * Requires: Nothing.
      * Modifies: Nothing.
@@ -61,7 +64,7 @@ public:
     /**
      * Requires: Nothing.
      * Modifies: Nothing.
-     * Effects:  returns true if all party members have nonZero healthCurr
+     * Effects:  returns true if at least one party member has nonZero healthCurr
      */
     bool alive();
     
@@ -71,12 +74,24 @@ public:
      * Effects:  Calls rest() on all non-active members (upping their health)
      */
     void restInactive();
+    
+    /**
+     * Requires: Nothing.
+     * Modifies: Decreases attackBoostTurns and defenseBoostTurns by 1
+     * Effects:  Nothing else.
+     */
+    void decreaseBoostTurns();
 
+    /**
+    * Requires: Nothing.
+    * Modifies: Nothing.
+    * Effects:  Returns the max level of entire party 
+    */
+    int getMaxLevelCaught();
+    
 private:
-    int activeCreature = 0;
-    
-    
-    
+    int activeCreature;
+    int maxLevelCaught;
 };
 
 #endif /* defined(__CreatureTrainer__Party__) */

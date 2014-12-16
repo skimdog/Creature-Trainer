@@ -23,7 +23,6 @@ using namespace std;
 bool randomizeBattles = true;
 
 int main(int argc, const char * argv[]) {
-    
     stringstream ss;
     PrintHelper::printIntro(ss);
     
@@ -50,21 +49,19 @@ int main(int argc, const char * argv[]) {
     //Explains the possible actions in battle
     PrintHelper::printOptions(ss);
 
+    
+    Item trainerItems; // Tracks the items that a Trainer picks up
+
     // Battle until all Creatures in the party faint.
     int battlesWon = -1;
+    int numMovesMade = 0;
+    int numIllegalMovesMade = 0;
     
     while (trainerParty.alive()) {
         battlesWon++;
-        
-        
-        
-        
         // Create the situation
-        
-        
-        
-        
-        runBattle(player, trainerParty, ss, battlesWon);
+        runBattle(player, trainerParty, trainerItems, ss,
+                  battlesWon, numMovesMade, numIllegalMovesMade);
     }
     
     // We only get here if the entire party is dead
